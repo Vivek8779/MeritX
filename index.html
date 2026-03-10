@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeritX - College Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+            <img src="logo.png" alt="MeritX Logo" style="max-height: 60px; width: auto;">
+            <div class="logo">Merit<span>X</span></div>
+        </a>
+        
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="predictions.html">Prediction List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="section hero">
+            <div class="hero-content">
+                <h1 class="animated-heading">Find Your Perfect MHT CET College</h1>
+                <p class="fade-up delay-1">Get predicted cutoffs based on your score and rank. Smart, fast, and reliable.</p>
+                <a href="predictions.html" class="btn btn-primary fade-up delay-2">Check Predictions →</a>
+            </div>
+            <div class="hero-image float-soft">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+        </section>
+
+        <section id="about" class="section about">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-cards">
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Accurate Predictions</h3>
+                    <p>We analyze previous years' cutoff trends to give you the most reliable college predictions.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-filter"></i>
+                    <h3>Smart Filters</h3>
+                    <p>Filter colleges by cutoff, location, branch, and more to find exactly what you need.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-users"></i>
+                    <h3>Student First</h3>
+                    <p>Our tool is designed by students for students – simple, intuitive, and free.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-container">
+                <form id="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-secondary">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> support@meritx.in</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 7522986975</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MeritX College Predictor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close menu when a nav link is clicked (same-page)
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.getAttribute('href').startsWith('#')) {
+                    navMenu.classList.remove('active');
+                    hamburger.querySelector('i').classList.add('fa-bars');
+                    hamburger.querySelector('i').classList.remove('fa-times');
+                }
+            });
+        });
+
+        // Smooth scroll for hash links on index page
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // If page loaded with a hash (e.g., from predictions page), scroll to it
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+
+        // Scroll-triggered fade-in for sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+       
+        // ===== LIQUID BACKGROUND =====
+        (function() {
+            const canvas = document.createElement('canvas');
+            canvas.id = 'liquid-canvas';
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let time = 0;
+
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+                canvas.style.position = 'fixed';
+                canvas.style.top = '0';
+                canvas.style.left = '0';
+                canvas.style.zIndex = '-1';
+                canvas.style.pointerEvents = 'none';
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            function drawBlob(x, y, size, speed, color) {
+                let t = time * speed;
+                let distortion = Math.sin(t) * 20;
+                ctx.beginPath();
+                for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
+                    let r = size + distortion * Math.sin(angle * 3 + t);
+                    let px = x + Math.cos(angle) * r;
+                    let py = y + Math.sin(angle) * r;
+                    if (angle === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fillStyle = color;
+                ctx.globalAlpha = 0.3;
+                ctx.fill();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                drawBlob(width * 0.3, height * 0.4, 200, 0.5, 'rgba(108, 92, 231, 0.3)');
+                drawBlob(width * 0.7, height * 0.6, 250, 0.3, 'rgba(0, 184, 148, 0.3)');
+                drawBlob(width * 0.5, height * 0.8, 180, 0.7, 'rgba(253, 203, 110, 0.3)');
+                time += 0.02;
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            // Smooth card hover (already in CSS, but keep for compatibility)
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+                    card.style.transform = 'scale(1.05) translateY(-10px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        })();
+
+        // ===== STAGGERED LETTER ANIMATION FOR HEADING =====
+        (function() {
+            const heading = document.querySelector('.hero-content h1');
+            if (!heading) return;
+            
+            // Only run if not already animated (to avoid double processing)
+            if (heading.querySelector('span')) return;
+            
+            const originalText = heading.innerText;
+            heading.innerHTML = '';
+            
+            const words = originalText.split(' ');
+            words.forEach((word, wordIndex) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.style.display = 'inline-block';
+                wordSpan.style.whiteSpace = 'nowrap';
+                
+                [...word].forEach((letter, letterIndex) => {
+                    const span = document.createElement('span');
+                    span.innerText = letter;
+                    span.style.display = 'inline-block';
+                    span.style.animation = `popLetter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${wordIndex * 0.15 + letterIndex * 0.03}s forwards`;
+                    span.style.opacity = '0';
+                    span.style.transform = 'translateY(30px) scale(0.8)';
+                    wordSpan.appendChild(span);
+                });
+                
+                heading.appendChild(wordSpan);
+                
+                if (wordIndex < words.length - 1) {
+                    heading.appendChild(document.createTextNode(' '));
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

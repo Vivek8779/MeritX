@@ -1,0 +1,26 @@
+{
+  "name": "meritx-2.0",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nirjara204/MeritX-2.0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nirjara204/MeritX-2.0/issues"
+  },
+  "homepage": "https://github.com/nirjara204/MeritX-2.0#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "duckdb": "^1.4.4",
+    "express": "^5.2.1"
+  },
+  "description": ""
+}
